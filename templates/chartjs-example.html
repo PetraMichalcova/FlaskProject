@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+	<title>Chartjs Charts</title>
+</head>
+
+<style>
+
+.navbar {
+        padding-left: 5rem;
+    }
+
+.holder {
+    width: 100%;
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity:0.8;
+    position:fixed;
+    width:100%;
+    bottom:0px;
+    left:0px;
+    z-index:1000;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            
+    <a class="navbar-brand" href="#">
+        <img src="https://icon2.cleanpng.com/20180420/lyq/kisspng-computer-icons-blog-article-5ad9d86712a992.2335630015242261510765.jpg" width="30" height="30" alt="">
+      </a>
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ data2.returnPage }}">Home <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/log_out" href="#">Log out</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+<body>
+    <div class="holder">
+	<div style="height: 50vh; width: 50%;">
+		<canvas id="myChart"></canvas>
+	</div>
+</div>
+
+	<script>
+		const labels = {{ labels | tojson}};
+
+		const data = {
+			labels: labels,
+			datasets: [{
+				label: 'Articles in Months',
+				backgroundColor: 'rgb(255, 99, 132)',
+				borderColor: 'rgb(255, 99, 132)',
+				data: {{ data | tojson}},
+			}]
+		};
+
+		const config = {
+			type: 'line',
+			data: data,
+			options: { maintainAspectRatio: false }
+		};
+
+		const myChart = new Chart(
+			document.getElementById('myChart'),
+			config
+		);
+
+	</script>
+</body>
+</html>

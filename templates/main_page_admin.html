@@ -1,0 +1,153 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'> 
+    <title>Flask APP!</title>
+
+    <style>
+
+.btn-fufiary {
+    color: #3F4751;
+    background-color: red;
+    min-width: 10em;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(228, 221, 229, 0.8);
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar {
+    padding-left: 5rem;
+}
+
+.page-item.active .page-link {
+background-color: rgba(228, 221, 229, 0.8);
+}
+
+a.page-link {
+ color: rgba(228, 221, 229, 0.8); 
+}
+
+span.page-link {
+  color: rgba(228, 221, 229, 0.8); 
+}
+
+span {
+ color: rgba(228, 221, 229, 0.8);
+}
+
+.page-item disabled {
+  color: rgba(228, 221, 229, 0.8);
+}
+
+    </style>
+</head>
+
+<body>
+ 
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            
+        <a class="navbar-brand" href="#">
+            <img src="https://icon2.cleanpng.com/20180420/lyq/kisspng-computer-icons-blog-article-5ad9d86712a992.2335630015242261510765.jpg" width="30" height="30" alt="">
+          </a>
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/main_page_admin">Home <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/add_article" href="#">Add</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users" href="#">Users</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/chart" href="#">Chart</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/log_out" href="#">Log out</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+
+          
+    <div class="container container-fluid my-5">
+        <div class="container container-fluid">
+
+        </div>
+        <h1 class="text-center txt-color">Articles</h1>
+        <div class="container col-offset-2 col-8">
+            <h5 class="text-center mt-4 mb-5 txt-color main-heading">
+                Brief overview of added articles about anything. We hope you find the topics interesting and valuable.
+            </h5>
+        </div>
+        <div>
+
+        </div>
+        <div class="container container-fluid">
+          {{pagination.links}}
+            <div class="row">
+                {% for article in articles %}
+                <div class="col-sm-12 col-md-6 col-xl-4 txt-color">
+                    <div class="card mb-3 rounded-3">
+                        <div class="d-flex justify-content-center align-items-center img-div">
+                            <img class="img-content" src="https://img.freepik.com/premium-psd/landscape-magazine-book-mockup-top-view_258438-546.jpg?w=1060" alt="Card image cap">
+                        </div>
+                        <div class="card-body txt-color p-4">
+                            <p class="card-date fw-300 mt-2 mb-1">{{ article.date }}</p>
+                            
+                            <a href="{{ url_for('info',id = article._id)}}">
+                            {{ article.title }}
+                            </a>
+
+                            <a href="{{ url_for('delete',id = article._id)}}">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                            
+                            <a href="{{ url_for('update',id = article._id)}}">
+                              <i class='fa fa-pencil'></i>
+                            </a>
+
+                            <p class="card-text fw-300"></p>
+                            <div class="row">
+                                <div class="col-8"></div>
+                                <div class="col-4 pe-0">
+                                    <div class="d-flex flex-row-reverse">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+  
+</body>
+
+
+</html>
